@@ -7,6 +7,7 @@ class Axe extends AABB {
   float timer = .5;
   float waitTimer = .5;
   boolean ready = false;
+  boolean hitAnything = false;
 
 
   Axe(float xPos, float yPos) {

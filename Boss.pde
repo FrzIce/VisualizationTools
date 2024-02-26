@@ -175,16 +175,24 @@ class Boss extends AABB {
 
     if (sword != null)
     {
-      pushMatrix();
-      translate(sword.x, sword.y);
-      rotate(radians(lerp(45, 360 + 90, sword.timer))); // rotates object
+      //pushMatrix();
+      //translate(sword.x, sword.y);
+      //rotate(radians(lerp(45, 360 + 90, sword.timer))); // rotates object
       //println("test");
-      if (sword.checkCollision(pTarget) && sword.isDead == false && player.iFrames <= 0) {
-        //println("took Damage");
-        player.velocity.x -= 500;
-      }
       sword.update();
-      popMatrix();
+        if (player.x + player.w / 2 >= sword.x - sword.h && sword.timer <= .2 && sword.timer >= .1 && player.iFrames <= 0 && sword.hitAnything == false) {
+          player.velocity.x -= 1000;
+          player.y -= 5;
+          player.velocity.y -= 400;
+          player.iFrames = 2;
+          player.hitPoints--;
+          sword.hitAnything = true;
+        }
+      //if (sword.checkCollision(pTarget) && sword.isDead == false && player.iFrames <= 0) {
+      //  //println("took Damage");
+      //  player.velocity.x -= 500;
+      //}
+      //popMatrix();
     }
     if (lance != null) {
       lance.update();
@@ -278,13 +286,13 @@ class Boss extends AABB {
     }
     if (axe != null) {
       axe.update();
-      if (axe.checkCollision(pTarget) && player.iFrames <= 0) {
+      if (player.x + player.w / 2 >= axe.x - axe.h && axe.timer <= .2 && axe.timer >= .1 && player.iFrames <= 0 && axe.hitAnything == false) {
         //println("took Damage");
-        player.velocity.x -= 800;
-        //player.velocity.y -= 500;
+        player.velocity.x -= 800;        
         player.iFrames = 2;
         player.hitPoints--;
-      }
+        axe.hitAnything = true;
+      }      
     }
     if (bolt != null) {
       bolt.update();
@@ -304,6 +312,7 @@ class Boss extends AABB {
         player.velocity.y -= 1000;
         player.iFrames = 2;
         player.hitPoints--;
+        hitPoints += 6;
       }
     }
 

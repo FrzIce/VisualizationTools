@@ -3,7 +3,8 @@ class SceneExplantion {
 
   SceneExplantion() {
     img = loadImage("Tree_Base.png");
-    player.hitPoints = 3;
+    player.hitPoints = player.startingHitPoints;
+    boss.hitPoints = boss.startingHitPoints;
   }
 
   void update() {

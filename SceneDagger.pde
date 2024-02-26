@@ -45,7 +45,7 @@ class SceneDagger{
     textSize(30);
     //textAlign(CENTER, TOP);
     text("The Ai will throw its dagger at you if it is second to last attack!", width/3 + 150, 100);
-    text("If the dagger hits you, the Ai will gain more time alive and will get more attacks!", width/3 + 150, 130);
+    text("If the dagger hits you, the Ai will gain more seconds to live and will get more attacks!", width/3 + 150, 130);
     image(img, 1050, 0);
   }
 }

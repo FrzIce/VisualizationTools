@@ -12,7 +12,7 @@ class Dagger extends AABB {
     y = yPos;
     angle = rotation;
     velocity = new PVector();
-    setSize(50, 100);
+    setSize(100, 50);
     img = loadImage("Knife.png");
   }
 
@@ -49,18 +49,18 @@ class Dagger extends AABB {
 
   void draw() {
     if (timer >= 0) {
-      pushMatrix();
-      translate(x, y);
-      rotate(radians(angle));
+      //pushMatrix();
+      //translate(x, y);
+      //rotate(radians(90));
 
       fill(200);
       //noStroke();
       //rect(0, 0, w, h);
-      image(img, 0, 0, w, h);
+      image(img, x, y, w, h);
 
       //stroke(1);
       fill(0);
-      popMatrix();
+      //popMatrix();
     }
   }
 }

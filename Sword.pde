@@ -7,6 +7,7 @@ class Sword extends AABB {
   float timer = .5;
   float waitTimer = .5;
   boolean ready = false;
+  boolean hitAnything = false;
 
 
 
@@ -40,9 +41,9 @@ class Sword extends AABB {
   void draw() {
     if (isDead == false) {
 
-      //pushMatrix();
-      //translate(x, y);
-      //rotate(radians(lerp(45, 360 + 90, timer))); // rotates object      
+      pushMatrix();
+      translate(x, y);
+      rotate(radians(lerp(45, 360 + 90, timer))); // rotates object      
       fill(200);
       //noStroke();
       line(0, 0, 0 + w, 0);
@@ -54,7 +55,7 @@ class Sword extends AABB {
       image(img, 0, 0, w, h);
 
 
-      //popMatrix();
+      popMatrix();
       //stroke(1);
       fill(0);
     }
