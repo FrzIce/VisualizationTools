@@ -27,6 +27,7 @@ class Player extends AABB {
     sprint = 1;
     groundLevel = y;
     inAir = false;
+    img = loadImage("Polyer.png");
   }
 
   void update() {
@@ -46,6 +47,10 @@ class Player extends AABB {
       y = groundLevel;
       inAir = false;
       velocity.y = 0;
+    }
+    
+    if (player.x + w >= boss.x - 50){
+     player.velocity.x -= 1000; 
     }
 
     //UPDATE INPUT ACTIONS IF THIS PLAYER IS IN FOCUS
@@ -113,7 +118,8 @@ class Player extends AABB {
     //  popMatrix();
     //}
 
-    rect(x, y, w, h);
+    //rect(x, y, w, h);
+    image(img, x, y, w, h);
 
 
 

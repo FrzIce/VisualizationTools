@@ -41,7 +41,11 @@ class SceneVine {
     line(0, height - 150, width, height - 150);
     textSize(40);
     textAlign(CENTER, TOP);
-    text("Vine", width/2, 50);
+    text("Vine", width/3 + 150, 50);
+    textSize(30);
+    //textAlign(CENTER, TOP);
+    text("The Ai will summon vines under you if it has more than 50% health,", width/3 + 150, 100);
+    text("and you are in its far range!", width/3 + 150, 130);
     image(img, 1050, 0);
   }
 }
