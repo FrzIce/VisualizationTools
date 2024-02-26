@@ -35,7 +35,7 @@ void setup() {
   
   ground = new Ground(0, height - 150);
   player = new Player(0, 0);
-  boss = new Boss(player.x + 500, 0);
+  boss = new Boss(player.x + 1200, 0, player);
   camera = new Camera(player, boss);
   //player.isFocused = true;
   //player2 = new Player(width/2, height/2);

@@ -32,6 +32,8 @@ class Player extends AABB {
   void update() {
     
     
+    
+    
     println(y);
 
     if (hitPoints <= 0) exit();
@@ -43,6 +45,7 @@ class Player extends AABB {
     if (groundLevel <= y) {
       y = groundLevel;
       inAir = false;
+      velocity.y = 0;
     }
 
     //UPDATE INPUT ACTIONS IF THIS PLAYER IS IN FOCUS

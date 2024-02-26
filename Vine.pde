@@ -6,6 +6,7 @@ class Vine extends AABB {
   float hitPoints = startingHitPoints;
   float timer = 2;
   float waitTime;
+  float originalX;
 
   Vine(float xPos, float yPos, int pattern) {
     x = xPos;
@@ -19,6 +20,7 @@ class Vine extends AABB {
     if (pattern == 5) waitTime = .9;
     if (pattern == 6) waitTime = 1;
     img = loadImage("Vine.png");
+    originalX = x;
   }
 
   void update() {
@@ -35,6 +37,8 @@ class Vine extends AABB {
 
   void draw() {
     if (timer >= 0) {
+      fill(200, 50, 0);
+      rect(originalX, 220, w, 30);
       fill(200);
       //noStroke();
       //rect(x, y, w, h);

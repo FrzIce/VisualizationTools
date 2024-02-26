@@ -37,7 +37,7 @@ class Ground extends AABB {
   }
 
   void draw() {
-  fill(128 / 2 + 128);  
+  fill(56, 62, 53);  
   //noStroke();
   rect(x, y, w, h); 
   //stroke(1);

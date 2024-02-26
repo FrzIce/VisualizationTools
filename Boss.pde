@@ -12,6 +12,7 @@ class Boss extends AABB {
   int pApplicationMap;
   boolean pInFight = false;
   int targetedZone; // 1 - close, 2 - mid, 3 - long
+  Player pTarget;
   //creates the weapons used for attacking
   Sword sword;
   Lance lance;
@@ -31,7 +32,7 @@ class Boss extends AABB {
   float startingHitPoints = 26;
   float hitPoints = startingHitPoints;
 
-  Boss(float xPos, float yPos) {
+  Boss(float xPos, float yPos, Player p) {
     x = xPos;
     y = yPos;
     velocity = new PVector();
@@ -40,13 +41,15 @@ class Boss extends AABB {
     zoneCloseEnd = ((x + halfW) + 400);
     zoneMidStart = ((x + halfW) - 1000);
     zoneMidEnd = ((x + halfW) + 1000);
+    pTarget = p;
+    img = loadImage("Boss.png");
   }
 
   void setup() {
   }
 
   void update() {
-    
+
     if (pApplicationMap != applicationMap)
     {
       targetedZone = 0;
@@ -69,9 +72,9 @@ class Boss extends AABB {
     if (applicationMap == 8 && pApplicationMap != applicationMap) {
       inFight = true;
       attackTimer = 3;
-    } 
+    }
 
-    
+
 
 
     if (hitPoints <= 0) switchToWin();
@@ -87,28 +90,28 @@ class Boss extends AABB {
           dagger = new Dagger(x + w, 0, 0);
           daggerAttack = true; //prevents daggers from being used again
         } else if (hitPoints <= (startingHitPoints / 2)) { // if boss has less then half hp
-          if ((player.x >= zoneCloseStart) && (player.x <= zoneCloseEnd)) { //SWORD
+          if ((player.x + w >= zoneCloseStart) && (player.x + w <= zoneCloseEnd)) { //SWORD
             sword = new Sword(x - 20, 0);
-          } else if ((player.x >= zoneMidStart) && (player.x <= zoneMidEnd)) { //AXE
-            axe = new Axe(x - 200, -30);
+          } else if ((player.x + w >= zoneMidStart) && (player.x + w <= zoneMidEnd)) { //AXE
+            axe = new Axe(player.x + player.w / 2 + 300, -30);
           } else { //LIGHTNING BOLT!!!!
             bolt = new Lightning(x + w, 100);
           }
         } else {
           //println("maybe");
-          if ((player.x >= zoneCloseStart) && (player.x <= zoneCloseEnd)) { //SWORD
+          if ((player.x + w >= zoneCloseStart) && (player.x + w <= zoneCloseEnd)) { //SWORD
             sword = new Sword(x - 20, 0);
-          } else if ((player.x >= zoneMidStart) && (player.x <= zoneMidEnd)) { //LANCE
+          } else if ((player.x + w >= zoneMidStart) && (player.x + w <= zoneMidEnd)) { //LANCE
             println("lances");
             lance = new Lance(x + w + 50, 60, 90, 1);
             lanceAngle = new Lance(player.x + player.w / 2, -300, 0, 2);
           } else { //VINES
-            vine1 = new Vine(((x + halfW) - (250 * 1)), 500, 1);
-            vine2 = new Vine(((x + halfW) - (250 * 2)), 500, 2);
-            vine3 = new Vine(((x + halfW) - (250 * 3)), 500, 3);
-            vine4 = new Vine(((x + halfW) - (250 * 4)), 500, 4);
-            vine5 = new Vine(((x + halfW) - (250 * 5)), 500, 5);
-            vine6 = new Vine(((x + halfW) - (250 * 6)), 500, 6);
+            vine1 = new Vine((player.x - (250 * 3)), 500, 1);
+            vine2 = new Vine((player.x - (250 * 2)), 500, 2);
+            vine3 = new Vine((player.x - (250 * 1)), 500, 3);
+            vine4 = new Vine(player.x, 500, 4);
+            vine5 = new Vine((player.x + (250 * 1)), 500, 5);
+            vine6 = new Vine((player.x + (250 * 2)), 500, 6);
           }
         }
         attackTimer = 3;
@@ -117,15 +120,13 @@ class Boss extends AABB {
       if (attackTimer <= 0) {
         sword = new Sword(x - 20, 0);
         attackTimer = 3;
-        
       }
       attackTimer -= dt;
     } else if (applicationMap == 3) { //Lance
       if (attackTimer <= 0) {
         lance = new Lance(x + w + 50, 60, 90, 1);
-        lanceAngle = new Lance(player.x + player.w / 2, -300, 0, 2);
+        lanceAngle = new Lance(x - 600, -300, 0, 2);
         attackTimer = 3;
-        
       }
       attackTimer -= dt;
     } else if (applicationMap == 4) { //Vine
@@ -137,28 +138,24 @@ class Boss extends AABB {
         vine5 = new Vine(((x + halfW) - (250 * 5)), 500, 5);
         vine6 = new Vine(((x + halfW) - (250 * 6)), 500, 6);
         attackTimer = 3;
-        
       }
       attackTimer -= dt;
     } else if (applicationMap == 5) { //Bolt
       if (attackTimer <= 0) {
         bolt = new Lightning(x + w, 100);
         attackTimer = 3;
-        
       }
       attackTimer -= dt;
     } else if (applicationMap == 6) { //Axe
       if (attackTimer <= 0) {
         axe = new Axe(x - 200, -30);
         attackTimer = 3;
-        
       }
       attackTimer -= dt;
     } else if (applicationMap == 7) { //Dagger
       if (attackTimer <= 0) {
         dagger = new Dagger(x + w, 0, 0);
         attackTimer = 3;
-        
       }
       attackTimer -= dt;
     }
@@ -166,7 +163,15 @@ class Boss extends AABB {
 
 
 
-    if (sword != null) sword.update();
+    if (sword != null)
+    {
+      sword.update();
+      println("test");
+      if (sword.checkCollision(pTarget)) {
+        println("took Damage");
+        player.velocity.x -= 500;
+      }
+    }
     if (lance != null) lance.update();
     if (lanceAngle != null) lanceAngle.update();
     if (vine1 != null) vine1.update();
@@ -208,7 +213,8 @@ class Boss extends AABB {
   void draw() {
     //Boss body
     fill(255, 0, 0);
-    rect(x, y, w, h);
+    //rect(x, y, w, h);
+    image(img, x, y, w, h);
     //noStroke();
     //draw skills
     if (sword != null) sword.draw();
@@ -229,29 +235,25 @@ class Boss extends AABB {
     //Zone 1
     stroke(128, 64, 64);
     line(zoneCloseStart, 200, zoneCloseStart, 250);
-    line(zoneCloseEnd, 200, zoneCloseEnd, 250);
+    //line(zoneCloseEnd, 200, zoneCloseEnd, 250);
 
     //Zone 2
     stroke(64, 32, 32);
     line(zoneMidStart, 200, zoneMidStart, 250);
-    line(zoneMidEnd, 200, zoneMidEnd, 250);
-    
+    //line(zoneMidEnd, 200, zoneMidEnd, 250);
+
     //Explantions target zones
     fill(255, 50, 50);
     if (targetedZone == 1) {
       rect(zoneCloseStart, 225, x - zoneCloseStart, 50);
-      rect(x + w, 225, zoneCloseEnd - (x + w), 50);
-    }
-    else if (targetedZone == 2){
+      //rect(x + w, 225, zoneCloseEnd - (x + w), 50);
+    } else if (targetedZone == 2) {
       rect(zoneMidStart, 225, zoneCloseStart - zoneMidStart, 50);
-      rect(zoneCloseEnd, 225, zoneMidEnd - zoneCloseEnd, 50);
-    }
-    else if (targetedZone == 3){
+      //rect(zoneCloseEnd, 225, zoneMidEnd - zoneCloseEnd, 50);
+    } else if (targetedZone == 3) {
       rect(zoneMidStart - 500, 225, 500, 50);
-      rect(zoneMidEnd, 225, 500, 50);
-    }
-    else {
-      
+      //rect(zoneMidEnd, 225, 500, 50);
+    } else {
     }
 
 

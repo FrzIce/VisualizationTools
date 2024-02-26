@@ -1,5 +1,6 @@
 class Axe extends AABB {
-
+  PImage img;
+  
   //Attributes
   float startingHitPoints = 3;
   float hitPoints = startingHitPoints;
@@ -13,6 +14,7 @@ class Axe extends AABB {
     y = yPos;
     velocity = new PVector();
     setSize(150, 400);
+    img = loadImage("Axe.png");
   }
 
   void update() {
@@ -40,7 +42,7 @@ class Axe extends AABB {
       translate(x, y);
       rotate(radians(lerp(45, 360 + 90, timer))); // rotates object
 
-      rect(0, 0, w, h);
+      image(img, 0, 0, w, h);
 
       popMatrix();
 

@@ -4,10 +4,10 @@ class SceneSword {
   }
 
   void update() {
-    background(128);
+    background(74, 90, 71);
     pushMatrix();
     scale(camera.zoom);
-    translate(-camera.x + (width / 2), camera.scaleY); 
+    translate(-camera.x + 850, camera.scaleY); 
     
     
     camera.update();

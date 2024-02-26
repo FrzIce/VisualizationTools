@@ -1,4 +1,5 @@
 class Dagger extends AABB {
+  PImage img;
 
   //Attributes
   float startingHitPoints = 3;
@@ -12,6 +13,7 @@ class Dagger extends AABB {
     angle = rotation;
     velocity = new PVector();
     setSize(50, 100);
+    img = loadImage("Knife.png");
   }
 
   void update() {
@@ -19,12 +21,16 @@ class Dagger extends AABB {
     if (timer <= 1) {
       velocity.x += 100;
       velocity.y -= 10;
+      angle = 45;
+      
       
     } else if (timer <= 2) {
       velocity.x += 50;
       velocity.y += 10;
+      angle = -45;
     } else {
       velocity.x -= 150;
+      angle = 90;
     }
 
 
@@ -45,11 +51,12 @@ class Dagger extends AABB {
     if (timer >= 0) {
       pushMatrix();
       translate(x, y);
-      rotate(radians(90));
+      rotate(radians(angle));
 
       fill(200);
       //noStroke();
-      rect(0, 0, w, h);
+      //rect(0, 0, w, h);
+      image(img, 0, 0, w, h);
 
       //stroke(1);
       fill(0);

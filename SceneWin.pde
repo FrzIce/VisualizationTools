@@ -9,7 +9,7 @@ class SceneWin{
     
     if (leftPressed && !pLeftPressed) {//if mouse clicked in certain area, will progress through scenes
       if ((mouseX > width - 350) && (mouseX < width - 50) && (mouseY > 595) && (mouseY < 695)){
-        switchToLoss();
+        exit();
       }
     }
     pLeftPressed = leftPressed;
@@ -17,7 +17,7 @@ class SceneWin{
   }
   
   void draw(){
-    background(128);
+    background(74, 90, 71);
     ground.draw();
     stroke(0);
     rect(width - 350, 595, 300, 100);

@@ -36,16 +36,16 @@ class Camera { //get distance between player and boss and make the middle where 
     bx = bTarget.x;
     inFight = bTarget.inFight;
     
-    if (zoom == 1){
-      scaleY = 320;
+    if (zoom == .7){
+      scaleY = 565;
     }
     else {
-      scaleY = 885;
+      scaleY = 630;
     }
 
 
     if (inFight) {
-      zoom = 1;
+      zoom = .7;
       if (px < bx) {
         x = px + ((bx - px) / 2 + (125 / 2));
         //println("testing");
@@ -58,7 +58,7 @@ class Camera { //get distance between player and boss and make the middle where 
       }
     }
     else if (!inFight){
-      zoom = .5;
+      zoom = .65;
       x = bx - width / 2 + - 150;
     }
 
