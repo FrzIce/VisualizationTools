@@ -1,7 +1,9 @@
 class SceneVine {
+  PImage img;
  
 
   SceneVine() {
+    img = loadImage("Tree_Vine.png");
    
   }
 
@@ -40,5 +42,6 @@ class SceneVine {
     textSize(40);
     textAlign(CENTER, TOP);
     text("Vine", width/2, 50);
+    image(img, 1050, 0);
   }
 }

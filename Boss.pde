@@ -13,6 +13,7 @@ class Boss extends AABB {
   boolean pInFight = false;
   int targetedZone; // 1 - close, 2 - mid, 3 - long
   Player pTarget;
+  int lastUsedAttack; // 0 - base, 1 - swordHigher, 2 - swordLower, 3 - lance, 4 - vine, 5 - axe, 6 - bolt, 7 - dagger
   //creates the weapons used for attacking
   Sword sword;
   Lance lance;
@@ -43,6 +44,7 @@ class Boss extends AABB {
     zoneMidEnd = ((x + halfW) + 1000);
     pTarget = p;
     img = loadImage("Boss.png");
+    lastUsedAttack = 0;
   }
 
   void setup() {
@@ -88,23 +90,29 @@ class Boss extends AABB {
       if (attackTimer <= 0) {
         if ((daggerAttack == false) && (hitPoints <= (startingHitPoints / 5))) { // checks if dagger attack has been used yet
           dagger = new Dagger(x + w, 0, 0);
+          lastUsedAttack = 7;
           daggerAttack = true; //prevents daggers from being used again
         } else if (hitPoints <= (startingHitPoints / 2)) { // if boss has less then half hp
           if ((player.x + w >= zoneCloseStart) && (player.x + w <= zoneCloseEnd)) { //SWORD
             sword = new Sword(x - 20, 0);
+            lastUsedAttack = 2;
           } else if ((player.x + w >= zoneMidStart) && (player.x + w <= zoneMidEnd)) { //AXE
             axe = new Axe(player.x + player.w / 2 + 300, -30);
+            lastUsedAttack = 5;
           } else { //LIGHTNING BOLT!!!!
             bolt = new Lightning(x + w, 100);
+            lastUsedAttack = 6;
           }
         } else {
           //println("maybe");
           if ((player.x + w >= zoneCloseStart) && (player.x + w <= zoneCloseEnd)) { //SWORD
             sword = new Sword(x - 20, 0);
+            lastUsedAttack = 1;
           } else if ((player.x + w >= zoneMidStart) && (player.x + w <= zoneMidEnd)) { //LANCE
             println("lances");
             lance = new Lance(x + w + 50, 60, 90, 1);
             lanceAngle = new Lance(player.x + player.w / 2, -300, 0, 2);
+            lastUsedAttack = 3;
           } else { //VINES
             vine1 = new Vine((player.x - (250 * 3)), 500, 1);
             vine2 = new Vine((player.x - (250 * 2)), 500, 2);
@@ -112,6 +120,7 @@ class Boss extends AABB {
             vine4 = new Vine(player.x, 500, 4);
             vine5 = new Vine((player.x + (250 * 1)), 500, 5);
             vine6 = new Vine((player.x + (250 * 2)), 500, 6);
+            lastUsedAttack = 4;
           }
         }
         attackTimer = 3;

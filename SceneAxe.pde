@@ -1,7 +1,8 @@
 class SceneAxe{
+  PImage img;
   
   SceneAxe(){
-    
+    img = loadImage("Tree_Axe.png");
   }
   
   void update(){
@@ -40,5 +41,6 @@ class SceneAxe{
     textSize(40);
     textAlign(CENTER, TOP);
     text("Axe", width/2, 50);
+    image(img, 1050, 0);
   }
 }

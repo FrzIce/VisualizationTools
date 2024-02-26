@@ -1,6 +1,8 @@
 class SceneExplantion {
+  PImage img;
 
   SceneExplantion() {
+    img = loadImage("Tree_Base.png");
   }
 
   void update() {
@@ -36,8 +38,11 @@ class SceneExplantion {
     text("It will swing a Sword, throw Lances, or summon Vines from the ground.", 30, 240);
     text("While if the boss has less then half his HP,", 30, 270);
     text("It will swing a Sword, swing an giant Axe, or summon a bolt of Lightning.", 30, 300);
-    text("The boss will have a last ditch effor at 6 health left,", 30, 330);
+    text("The boss will have a last ditch effot on its second to last attack,", 30, 330);
     text("It will throw a dagger to the player and it will fly back to the boss.", 30, 360);
+    
+    
+    image(img, 1050, 100);
     
   }
 }

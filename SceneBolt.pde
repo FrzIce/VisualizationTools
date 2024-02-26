@@ -1,6 +1,8 @@
 class SceneBolt{
+  PImage img;
   
   SceneBolt(){
+    img = loadImage("Tree_Bolt.png");
     
   }
   
@@ -41,5 +43,6 @@ class SceneBolt{
     textSize(40);
     textAlign(CENTER, TOP);
     text("Bolt", width/2, 50);    
+    image(img, 1050, 0);
   }
 }

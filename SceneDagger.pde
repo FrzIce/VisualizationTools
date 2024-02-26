@@ -1,6 +1,8 @@
 class SceneDagger{
+  PImage img;
   
   SceneDagger(){
+    img = loadImage("Tree_Dagger.png");
     
   }
   
@@ -40,5 +42,6 @@ class SceneDagger{
     textSize(40);
     textAlign(CENTER, TOP);
     text("Dagger", width/2, 50);
+    image(img, 1050, 0);
   }
 }

@@ -1,6 +1,10 @@
 class SceneSword {
+  PImage img;
+  PImage img2;
 
   SceneSword() {
+    img = loadImage("Tree_SwordHigher.png");
+    img2 = loadImage("Tree_SwordLower.png");
   }
 
   void update() {
@@ -39,5 +43,7 @@ class SceneSword {
     textSize(40);
     textAlign(CENTER, TOP);
     text("Sword", width/2, 50);
+    image(img, 1050, 0);
+    image(img2, 1050, 0);
   }
 }

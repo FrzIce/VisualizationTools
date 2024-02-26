@@ -1,7 +1,8 @@
 class SceneLance{
+  PImage img;
   
   SceneLance(){
-    
+    img = loadImage("Tree_Lance.png");
   }
   
   void update(){
@@ -40,5 +41,6 @@ class SceneLance{
     textSize(40);
     textAlign(CENTER, TOP);
     text("Lance", width/2, 50);
+    image(img, 1050, 0);
   }
 }
