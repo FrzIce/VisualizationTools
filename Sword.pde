@@ -30,31 +30,31 @@ class Sword extends AABB {
     }
 
 
+    super.update();  
+      
 
-    
 
-    super.update();
-    
-    
-    println(x);
+    //println(x);
   }
 
   void draw() {
     if (isDead == false) {
-      
-      pushMatrix();
-      translate(x, y);
-      rotate(radians(lerp(45, 360 + 90, timer))); // rotates object
+
+      //pushMatrix();
+      //translate(x, y);
+      //rotate(radians(lerp(45, 360 + 90, timer))); // rotates object      
       fill(200);
       //noStroke();
       line(0, 0, 0 + w, 0);
+      println(x);
+      //println(y);
 
 
       //rect(0, 0, w, h);
       image(img, 0, 0, w, h);
 
 
-      popMatrix();
+      //popMatrix();
       //stroke(1);
       fill(0);
     }

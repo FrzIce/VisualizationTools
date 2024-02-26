@@ -3,6 +3,7 @@ class SceneExplantion {
 
   SceneExplantion() {
     img = loadImage("Tree_Base.png");
+    player.hitPoints = 3;
   }
 
   void update() {
@@ -40,6 +41,7 @@ class SceneExplantion {
     text("It will swing a Sword, swing an giant Axe, or summon a bolt of Lightning.", 30, 300);
     text("The boss will have a last ditch effot on its second to last attack,", 30, 330);
     text("It will throw a dagger to the player and it will fly back to the boss.", 30, 360);
+    text("If this dagger hits your character then the Ai will gain 2 more attacks.", 30, 390);
     
     
     image(img, 1050, 100);

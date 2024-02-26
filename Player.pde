@@ -9,6 +9,7 @@ class Player extends AABB {
   float groundLevel;
   boolean hasDouble = true;
   boolean canJump = true;
+  float iFrames = 0;
 
 
 
@@ -35,11 +36,15 @@ class Player extends AABB {
     
     
     
-    println(y);
+    println(x);
 
-    if (hitPoints <= 0) exit();
+    if (hitPoints <= 0) switchToLoss();
 
     velocity.y += GRAVITY * dt * 2;
+    
+    if (iFrames > 0) iFrames -= dt;
+    
+    println(iFrames);
 
     
 
@@ -120,6 +125,7 @@ class Player extends AABB {
 
     //rect(x, y, w, h);
     image(img, x, y, w, h);
+    
 
 
 

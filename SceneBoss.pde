@@ -84,6 +84,7 @@ class SceneBoss {
     text("BATTLE!!!", width/2, 50);
     fill(200,0,0);
     text(int(boss.hitPoints), 1150, 15);
+    text("Player health : " + player.hitPoints, 180, 20);
     image(img, 1050, 0);
     fill(0);
   }

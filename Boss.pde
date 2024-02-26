@@ -82,7 +82,7 @@ class Boss extends AABB {
     if (hitPoints <= 0) switchToWin();
 
     //println(hitPoints);
-    println(attackTimer);
+    //println(attackTimer);
 
     if (inFight == true) { //main tree when boss in in play, so sceneBoss
       hitPoints -= dt;
@@ -109,7 +109,7 @@ class Boss extends AABB {
             sword = new Sword(x - 20, 0);
             lastUsedAttack = 1;
           } else if ((player.x + w >= zoneMidStart) && (player.x + w <= zoneMidEnd)) { //LANCE
-            println("lances");
+            //println("lances");
             lance = new Lance(x + w + 50, 60, 90, 1);
             lanceAngle = new Lance(player.x + player.w / 2, -300, 0, 2);
             lastUsedAttack = 3;
@@ -124,6 +124,7 @@ class Boss extends AABB {
           }
         }
         attackTimer = 3;
+        player.iFrames = 0;
       }
     } else if (applicationMap == 2) { //Sword
       if (attackTimer <= 0) {
@@ -174,24 +175,137 @@ class Boss extends AABB {
 
     if (sword != null)
     {
-      sword.update();
-      println("test");
-      if (sword.checkCollision(pTarget)) {
-        println("took Damage");
+      pushMatrix();
+      translate(sword.x, sword.y);
+      rotate(radians(lerp(45, 360 + 90, sword.timer))); // rotates object
+      //println("test");
+      if (sword.checkCollision(pTarget) && sword.isDead == false && player.iFrames <= 0) {
+        //println("took Damage");
         player.velocity.x -= 500;
       }
+      sword.update();
+      popMatrix();
     }
-    if (lance != null) lance.update();
-    if (lanceAngle != null) lanceAngle.update();
-    if (vine1 != null) vine1.update();
-    if (vine2 != null) vine2.update();
-    if (vine3 != null) vine3.update();
-    if (vine4 != null) vine4.update();
-    if (vine5 != null) vine5.update();
-    if (vine6 != null) vine6.update();
-    if (axe != null) axe.update();
-    if (bolt != null) bolt.update();
-    if (dagger != null) dagger.update();
+    if (lance != null) {
+      lance.update();
+      if (lance.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.velocity.x -= 800;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (lanceAngle != null) {
+      lanceAngle.update();
+      if (lanceAngle.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.velocity.x -= 800;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (vine1 != null) {
+      vine1.update();
+      if (vine1.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.y -= 100;
+        player.inAir = true;
+        player.velocity.x -= 800;
+        player.velocity.y -= 500;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (vine2 != null) {
+      vine2.update();
+      if (vine2.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.y -= 100;
+        player.inAir = true;
+        player.velocity.x -= 800;
+        player.velocity.y -= 500;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (vine3 != null) {
+      vine3.update();
+      if (vine3.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.y -= 100;
+        player.inAir = true;
+        player.velocity.x -= 800;
+        player.velocity.y -= 500;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (vine4 != null) {
+      vine4.update();
+      if (vine4.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.y -= 100;
+        player.inAir = true;
+        player.velocity.x -= 800;
+        player.velocity.y -= 500;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (vine5 != null) {
+      vine5.update();
+      if (vine5.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.y -= 100;
+        player.inAir = true;
+        player.velocity.x -= 800;
+        player.velocity.y -= 500;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (vine6 != null) {
+      vine6.update();
+      if (vine6.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.y -= 100;
+        player.inAir = true;
+        player.velocity.x -= 800;
+        player.velocity.y -= 500;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (axe != null) {
+      axe.update();
+      if (axe.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.velocity.x -= 800;
+        //player.velocity.y -= 500;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (bolt != null) {
+      bolt.update();
+      if (bolt.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.velocity.x += 800;
+        player.velocity.y -= 1000;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
+    if (dagger != null) {
+      dagger.update();
+      if (dagger.checkCollision(pTarget) && player.iFrames <= 0) {
+        //println("took Damage");
+        player.velocity.x += 800;
+        player.velocity.y -= 1000;
+        player.iFrames = 2;
+        player.hitPoints--;
+      }
+    }
 
 
 

@@ -79,6 +79,6 @@ class Camera { //get distance between player and boss and make the middle where 
     //} else y += dy * 0.1;
 
 
-    println(x);
+    //println(x);
   }
 }
